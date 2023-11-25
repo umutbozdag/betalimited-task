@@ -1,9 +1,10 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-// https://vitejs.dev/config/
 
+// https://vitejs.dev/config/
 export default ({ mode }) => {
+  Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
   return defineConfig({
     plugins: [react()],
     resolve: {
@@ -22,8 +23,11 @@ export default ({ mode }) => {
       },
     },
     define: {
-      "process.env":
-        mode === "production" ? require(".env.prod") : require(".env.dev"),
+      "process.env.VITE_API_URL": JSON.stringify(
+        mode === "production"
+          ? process.env.VITE_API_URL
+          : process.env.VITE_API_URL
+      ),
     },
   });
 };
