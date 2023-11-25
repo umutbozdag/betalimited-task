@@ -30,7 +30,6 @@ function* searchProductWorker(action: PayloadAction<string>) {
     const data = yield call(searchProductService, action.payload);
     yield put(searchProductSuccess(data));
   } catch (error) {
-    console.log("error");
     yield put(
       searchProductFailure((error as ApolloError).message) ||
         "Failed to search product"
