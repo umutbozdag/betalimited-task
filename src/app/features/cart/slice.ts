@@ -4,6 +4,7 @@ import { cartActionTypes } from "app/features/cart/actionTypes";
 import { CartItem } from "@/__generated__/graphql";
 import { addToCart, subtractFromCart } from "@/utils/cartOperationUtils";
 import {
+  CartOperationEnum,
   CartOperationStatusEnum,
   ExecuteCartOperationPayload,
 } from "types/Cart";
@@ -46,9 +47,9 @@ const cartSlice = createSlice({
 
       const { product, operation } = action.payload;
 
-      if (operation === "add") {
+      if (operation === CartOperationEnum.ADD) {
         state.cartItems = addToCart(state.cartItems, product);
-      } else if (operation === "subtract") {
+      } else if (operation === CartOperationEnum.SUBTRACT) {
         state.cartItems = subtractFromCart(state.cartItems, product);
       }
 

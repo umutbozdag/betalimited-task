@@ -13,7 +13,7 @@ import getCartService from "app/features/cart/services/getCartService";
 import { CartItem } from "@/__generated__/graphql";
 import subtractFromCartService from "app/features/cart/services/subtractFromCartService";
 import { ApolloError } from "@apollo/client";
-import { ExecuteCartOperationPayload } from "types/Cart";
+import { CartOperationEnum, ExecuteCartOperationPayload } from "types/Cart";
 
 function* fetchCartItemsWorker() {
   try {
@@ -29,12 +29,12 @@ function* fetchCartItemsWorker() {
 function* executeCartOperationWorker(action: ExecuteCartOperationPayload) {
   try {
     const { product, operation } = action.payload;
-    if (operation === "add") {
+    if (operation === CartOperationEnum.ADD) {
       const isSuccess = yield call(addToCartService, product.id);
       if (isSuccess) {
         yield put(executeCartOperationSuccess(action.payload));
       }
-    } else if (operation === "subtract") {
+    } else if (operation === CartOperationEnum.SUBTRACT) {
       const isSuccess = yield call(subtractFromCartService, product.id);
       if (isSuccess) {
         yield put(executeCartOperationSuccess(action.payload));
