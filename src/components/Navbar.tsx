@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AppBar, Toolbar, Typography, Box, useTheme } from "@mui/material";
+import { AppBar, Toolbar, Box, useTheme } from "@mui/material";
 import SearchBar from "components/SearchBar";
 import { useDispatch } from "app/hooks";
 import { searchProductStart, setSearchValue } from "app/features/product/slice";
@@ -10,22 +10,20 @@ const DEFAULT_DEBOUNCE = 500;
 const NavbarLogo = () => {
   const theme = useTheme();
   return (
-    <Typography
-      variant="h6"
-      component="div"
+    <Box
+      component="img"
       sx={{
-        fontSize: "1.5em",
-        color: theme.palette.layout.common.primary,
-        [theme.breakpoints.down("md")]: {
-          fontSize: "1.2em",
+        width: theme.spacing(22),
+        [theme.breakpoints.down("lg")]: {
+          mr: 1,
         },
-        [theme.breakpoints.down("sm")]: {
-          display: "none",
+        [theme.breakpoints.down("md")]: {
+          width: theme.spacing(17),
+          mb: 2,
         },
       }}
-    >
-      betalimited
-    </Typography>
+      src="/logo.png"
+    />
   );
 };
 
@@ -48,13 +46,32 @@ const Navbar: React.FC = () => {
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ height: theme.spacing(11) }}>
+      <Toolbar
+        sx={{
+          height: theme.spacing(10),
+          [theme.breakpoints.down("md")]: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            p: theme.spacing(8),
+          },
+        }}
+      >
         <NavbarLogo />
 
-        <Box sx={{ display: "flex", justifyContent: "center", flexGrow: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexGrow: 1,
+            [theme.breakpoints.down("md")]: {
+              pb: theme.spacing(1),
+            },
+          }}
+        >
           <SearchBar
             placeholder="Searching for..."
-            width={600}
             onInputChange={(searchValue) => handleInputChange(searchValue)}
           >
             Search
