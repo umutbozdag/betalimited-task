@@ -1,4 +1,4 @@
-**You can check GraphQL Apollo backend from here: https://github.com/umutbozdag/graphql-backend**
+### You can check GraphQL Apollo backend server from [here](https://github.com/umutbozdag/graphql-backend).
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
