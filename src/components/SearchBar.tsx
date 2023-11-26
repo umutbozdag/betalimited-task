@@ -1,5 +1,12 @@
 import React from "react";
-import { InputBase, Paper, useTheme, darken } from "@mui/material";
+import {
+  InputBase,
+  Paper,
+  useTheme,
+  darken,
+  SxProps,
+  Theme,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "components/shared/Button";
 
@@ -9,14 +16,15 @@ interface ISearchBarProps {
   height?: React.CSSProperties["height"];
   onInputChange?: (value: string) => void;
   children?: JSX.Element | string;
+  sxProps?: SxProps<Theme>;
 }
 
 const SearchBar: React.FC<ISearchBarProps> = ({
   placeholder,
   onInputChange,
-  height,
   width,
   children,
+  sxProps,
 }) => {
   const theme = useTheme();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,10 +39,8 @@ const SearchBar: React.FC<ISearchBarProps> = ({
         height: theme.spacing(6),
         display: "flex",
         alignItems: "center",
-        borderRadius: 20,
-        border: `1px solid ${theme.palette.layout.common.secondary}`,
         [theme.breakpoints.up("md")]: {
-          width: 700,
+          width: width || 700,
         },
         [theme.breakpoints.down("md")]: {
           width: 450,
@@ -42,27 +48,35 @@ const SearchBar: React.FC<ISearchBarProps> = ({
         [theme.breakpoints.down("sm")]: {
           width: 300,
         },
+        ...sxProps,
       }}
     >
-      <SearchIcon
-        sx={{
-          ml: 1.5,
-          color: theme.palette.layout.common.secondary,
-        }}
-      />
       <InputBase
         placeholder={placeholder}
         onChange={handleChange}
         sx={{
           pl: theme.spacing(1),
           flex: 1,
-          height,
-          input: {
-            color: theme.palette.layout.common.primary,
-          },
-          width: width || "100%",
+          border: `1px solid ${theme.palette.layout.common.secondary}`,
+          borderRadius: 20,
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0,
+          height: '100%',
+          borderRight: 'none',
+          '&.Mui-focused': {
+            borderColor: theme.palette.layout.common.danger,
+          }
         }}
         inputProps={{ "aria-label": "search" }}
+        startAdornment={
+          <SearchIcon
+            sx={{
+              ml: 1,
+              mr: 0.5,
+              color: theme.palette.layout.common.secondary,
+            }}
+          />
+        }
       />
       <Button
         aria-label="search"
@@ -71,7 +85,7 @@ const SearchBar: React.FC<ISearchBarProps> = ({
           borderRadius: theme.spacing(20),
           borderTopLeftRadius: 0,
           borderBottomLeftRadius: 0,
-          height: '100%',
+          height: "100%",
           "&:hover": {
             backgroundColor: darken(theme.palette.layout.common.danger, 0.1),
           },

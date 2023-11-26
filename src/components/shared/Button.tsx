@@ -19,7 +19,6 @@ interface IButtonProps extends ButtonBaseProps {
   variant?: ButtonType;
   size?: ButtonSize;
   sxProps?: SxProps<Theme>;
-  iconButtonSxProps?: SxProps<Theme>;
 }
 
 const Button: React.FC<IButtonProps> = ({
@@ -28,7 +27,6 @@ const Button: React.FC<IButtonProps> = ({
   variant = "primary",
   size = "medium",
   sxProps,
-  iconButtonSxProps,
   children,
   ...props
 }) => {
@@ -63,7 +61,7 @@ const Button: React.FC<IButtonProps> = ({
   return icon ? (
     <IconButton
       sx={{
-        ...iconButtonSxProps,
+        ...sxProps,
       }}
     >
       {icon}
