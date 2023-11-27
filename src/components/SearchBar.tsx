@@ -89,13 +89,12 @@ const SearchBar: React.FC<ISearchBarProps> = ({
           "&:hover": {
             backgroundColor: darken(theme.palette.layout.common.danger, 0.1),
           },
-          fontWeight: 600,
           [theme.breakpoints.down("md")]: {
             width: theme.spacing(15),
           },
           [theme.breakpoints.down("sm")]: {
             width: theme.spacing(8),
-            fontSize: 12,
+            fontSize: 14,
           },
         }}
       >

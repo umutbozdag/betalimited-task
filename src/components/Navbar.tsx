@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AppBar, Toolbar, Box, useTheme } from "@mui/material";
+import { AppBar, Toolbar, Box, useTheme, Typography } from "@mui/material";
 import SearchBar from "components/SearchBar";
 import { useDispatch } from "app/hooks";
 import { searchProductStart, setSearchValue } from "app/features/product/slice";
@@ -74,7 +74,15 @@ const Navbar: React.FC = () => {
             placeholder="Searching for..."
             onInputChange={(searchValue) => handleInputChange(searchValue)}
           >
-            Search
+            <Typography
+              sx={{
+                [theme.breakpoints.down("sm")]: {
+                  fontSize: 14,
+                },
+              }}
+            >
+              Search
+            </Typography>
           </SearchBar>
         </Box>
       </Toolbar>
