@@ -18,17 +18,25 @@ const theme = createTheme({
         primary: grey["800"],
         secondary: grey["500"],
         tertiary: grey["100"],
-        danger: '#bd4f54',
+        danger: "#bd4f54",
         white: common["white"],
       },
     },
   },
   components: {
+    MuiTypography: {
+      defaultProps: {
+        fontWeight: 500
+      }
+    },
     MuiAppBar: {
       styleOverrides: {
         colorDefault: "transparent",
       },
     },
+  },
+  typography: {
+    fontFamily: `Inter, 'sans-serif'`,
   },
 });
 
